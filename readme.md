@@ -2,6 +2,7 @@ gulp template
 
 structure src
 
+```
 source
 	├──blocks
 	│		├──header
@@ -50,3 +51,5 @@ source
 	 		 		├──variables.sass
 	 		 		├──mixins.sass
 	 		 		└──global_sass
+
+```

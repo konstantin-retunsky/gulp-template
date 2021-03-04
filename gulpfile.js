@@ -1,7 +1,8 @@
 const { src, dest, parallel, series, watch } = require('gulp')
 const pugHtml = require('./gulp/tasks/pugHtml')
-const style = require('./gulp/tasks/style')
+const styles = require('./gulp/tasks/styles')
+const scripts = require('./gulp/tasks/scripts')
 
 module.exports.build = series(
-  pugHtml, style
+  pugHtml, styles, scripts
 )

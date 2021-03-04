@@ -5,10 +5,10 @@ const notify = require("gulp-notify")
 const gulpHtmlBemValidator = require('gulp-html-bem-validator');
 const plumber = require('gulp-plumber')
 
-const pathBuildPug = './source/pages/**/*.pug'
+const pathSrcPug = './source/pages/**/*.pug'
 
 module.exports = function pugHtml(cb) {
-  return src(pathBuildPug)
+  return src(pathSrcPug)
     .pipe(plumber())
     .pipe(pug({pretty: false}))
       .on('err', notify.onError((err) => `Pug err: ${err.message}`))

@@ -3,14 +3,16 @@ const pug = require('gulp-pug')
 const rename = require('gulp-rename')
 const notify = require("gulp-notify")
 const gulpHtmlBemValidator = require('gulp-html-bem-validator');
+const plumber = require('gulp-plumber')
 
 const pathBuildPug = './source/pages/**/*.pug'
 
 module.exports = function pugHtml(cb) {
   return src(pathBuildPug)
-  .pipe(pug({pretty: false}))
-    .on('error', notify.onError((err) => `Pug ERROR: ${err.message}`))
-  .pipe(rename({dirname: ''}))
-  .pipe(gulpHtmlBemValidator())
-  .pipe(dest('build'));
+    .pipe(plumber())
+    .pipe(pug({pretty: false}))
+      .on('err', notify.onError((err) => `Pug err: ${err.message}`))
+    .pipe(rename({dirname: ''}))
+    .pipe(gulpHtmlBemValidator())
+    .pipe(dest('build'));
 }

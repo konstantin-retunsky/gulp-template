@@ -1,0 +1,8 @@
+input {
+  border: 1px solid gray;
+  background: white;
+
+  &[type=text] { color: black; }
+  &.some_class { display: none; }
+  &.test {background-color:red;}
+}

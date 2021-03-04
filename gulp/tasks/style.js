@@ -5,15 +5,34 @@ const notify = require("gulp-notify")
 const plumber = require('gulp-plumber')
 const concat = require('gulp-concat')
 const sass = require('gulp-sass');
+const cleanCSS = require('gulp-clean-css')
+const sourcemaps = require('gulp-sourcemaps')
+const shorthand = require('gulp-shorthand')
+const autoprefixer = require('gulp-autoprefixer')
 
-const srcStyle = './source/pages/**/*.sass'
-const srcGlobal = './source/global/sass/global_style.sass'
+const srcStyle = './source/pages/**/*.scss'
+const srcGlobal = './source/global/scss/global_style.scss'
 // fs.existsSync(path)
 
 module.exports = function sytle(cb) {
   return src([srcGlobal, srcStyle])
+    .pipe(plumber())
+    .pipe(sourcemaps.init())
     .pipe(sass().on('error', sass.logError))
+    .pipe(autoprefixer({
+      cascade: false
+    }))
+    .pipe(shorthand())
     .pipe(rename({dirname: ''}))
     .pipe(concat('style.css'))
+    .pipe(sourcemaps.write())
+    .pipe(dest('build/css'))
+    .pipe(cleanCSS({
+      debug: true,
+      compatibility: '*'
+    }, details => {
+      console.log(`${details.name}: Original size:${details.stats.originalSize} - Minified size: ${details.stats.minifiedSize}`)
+    }))
+    .pipe(rename({ suffix: '.min' }))
     .pipe(dest('build/css'))
 }

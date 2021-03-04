@@ -17,9 +17,9 @@ module.exports = function scripts() {
       presets: ['@babel/env']
     }))
     .pipe(rename({dirname: ''}))
-    .pipe(dest('build/javascript'))
+    .pipe(dest('build/js'))
     .pipe(terser())
     .pipe(sourcemaps.write())
     .pipe(rename({suffix: '.min'}))
-    .pipe(dest('build/javascript'))
+    .pipe(dest('build/js'))
 }

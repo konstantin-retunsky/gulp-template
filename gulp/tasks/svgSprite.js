@@ -2,11 +2,10 @@ const { src, dest, parallel, series, watch } = require('gulp')
 const svgstore = require('gulp-svgstore')
 const rename = require('gulp-rename')
 const imagemin = require('gulp-imagemin');
-
-let spritesSrc = "./source/**/sprite/*.svg"
+const path = require('../pathTasks')
 
 module.exports = function svgSprite() {
-  return src(spritesSrc)
+  return src(path.src.svgSprite)
     .pipe(svgstore({
       inlineSvg: true
     }))
@@ -19,5 +18,5 @@ module.exports = function svgSprite() {
       })
     ]))
     .pipe(rename('sprite.svg'))
-    .pipe(dest('build/img'))
+    .pipe(dest(path.build.svgSprite))
 }

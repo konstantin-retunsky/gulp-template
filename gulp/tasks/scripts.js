@@ -5,11 +5,10 @@ const sourcemaps = require('gulp-sourcemaps')
 const eslint  = require('gulp-eslint')
 const babel = require('gulp-babel')
 const terser = require('gulp-terser')
-
-const srcScripts = './source/**/*.js'
+const path = require("../pathTasks")
 
 module.exports = function scripts() {
-  return  src(srcScripts)
+  return  src(path.src.scripts)
     .pipe(plumber())
     // .pipe(eslint())
     // .pipe(eslint.format())
@@ -21,5 +20,5 @@ module.exports = function scripts() {
     .pipe(terser())
     .pipe(sourcemaps.write())
     .pipe(rename({suffix: '.min'}))
-    .pipe(dest('build/js'))
+    .pipe(dest(path.build.scripts))
 }

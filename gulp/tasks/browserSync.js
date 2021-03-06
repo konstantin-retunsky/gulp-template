@@ -4,7 +4,6 @@ const svgSprite = require("./svgSprite");
 const styles = require("./styles");
 const pugHtml = require("./pugHtml");
 const scripts = require("./scripts");
-
 const server = require("browser-sync").create();
 const path = require("../pathTasks");
 
@@ -21,17 +20,11 @@ module.exports = function browserSync(cb) {
     cors: true,
   });
 
-  // gulp.watch('src/img/*.{gif,png,jpg,svg,webp}', gulp.series(imageMinify, readyReload))
-  // gulp.watch('src/img/sprite/*.svg', gulp.series(svgSprite, readyReload))
-  // gulp.watch('src/img/svg/*.svg', gulp.series(svgO, readyReload))
-  // gulp.watch('src/styles/**/*.scss', gulp.series(styles, cb => gulp.src('build/css').pipe(server.stream()).on('end', cb)))
-  // gulp.watch('src/js/**/*.js', gulp.series(script, readyReload))
-  // watch(path.browserSync.pubHtml, series(pugHtml, readyReload))
-  console.log(pugHtml);
-  watch("./source/**/*.pug", series(pugHtml, reload));
-
-
-  // reload()
+  watch(path.browserSync.pubHtml, series(pugHtml, reload));
+  watch(path.browserSync.images, series(images, reload))
+  watch(path.browserSync.svgSprite, series(svgSprite, reload))
+  watch(path.browserSync.styles, series(styles, cb => src('build/css').pipe(server.stream()).on('end', cb)))
+  watch(path.browserSync.scripts, series(scripts, reload))
 
   cb();
 };

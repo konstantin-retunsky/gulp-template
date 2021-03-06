@@ -19,5 +19,9 @@ module.exports = {
   browserSync: {
     build: "build",
     pubHtml: "./source/**/*.pug", 
+    styles: "./source/**/*.scss",
+    images: "./source/**/images/*.{jpg,png,svg}",
+    svgSprite: "./source/**/sprite/*.svg",
+    scripts: "./source/**/*.js",
   }
 }

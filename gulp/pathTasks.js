@@ -6,6 +6,7 @@ module.exports = {
     scripts: "./source/**/*.js",
     images: "./source/**/images/*.{jpg,png,svg}",
     svgSprite: "./source/**/sprite/*.svg",
+    fonts: "./source/global/fonts/*",
   }, 
   build: {
     styles: "build/css",
@@ -13,5 +14,10 @@ module.exports = {
     scripts: "build/js",
     images: "build/img",
     svgSprite: "build/img",
+    fonts: "build/fonts",
+  },
+  browserSync: {
+    build: "build",
+    pubHtml: "./source/**/*.pug", 
   }
 }

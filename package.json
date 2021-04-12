@@ -1,0 +1,24 @@
+{
+  "name": "gulp-template",
+  "version": "1.0.0",
+  "description": "gulp template",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/konstantin-retunsky/gulp-template.git"
+  },
+  "author": "konstantin.retunsky@gmail.com",
+  "keywords": [
+    "gulp",
+    "js",
+    "scss",
+    "nunjucks",
+    "linters"
+  ],
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/konstantin-retunsky/gulp-template/issues"
+  },
+  "homepage": "https://github.com/konstantin-retunsky/gulp-template#readme"
+}

@@ -1,14 +1,14 @@
-import gulp from 'gulp';
+import {gulp, series} from 'gulp';
 import config from './gulp/config';
 import { scriptsBuild, scriptsWatch } from './gulp/tasks/scripts';
 
 config.setEnv();
 
-export const build = gulp.series(
+export const build = series(
   scriptsBuild,
 );
 
-export const watch = gulp.series(
+export const watch = series(
   build,
   scriptsWatch,
 );

@@ -5,7 +5,7 @@ const config = {
   src: {
     root: srcPath,
     sass: `${srcPath}/scss`,
-    js: `${srcPath}/js`,
+    scripts: `${srcPath}/{blocks,global}/**/*.js`,
     fonts: `${srcPath}/assets/fonts`,
     images: `${srcPath}/assets/images`,
     iconsMono: `${srcPath}/assets/icons/mono`,
@@ -13,11 +13,11 @@ const config = {
     pug: `${srcPath}/pug`,
   },
 
-  dest: {
+  build: {
     root: destPath,
     html: destPath,
     css: `${destPath}/css`,
-    js: `${destPath}/js`,
+    scripts: `${destPath}/js`,
     fonts: `${destPath}/fonts`,
     images: `${destPath}/images`,
   },

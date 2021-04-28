@@ -14,7 +14,7 @@ TEXT_PAGE="
 {%
   set data = {
     titlePage: \"Фото и видео\",
-    textPage: \"Не можете решиться на путешествие из-за курса? Фотографии помогут вам забыть о политике и экономике.\" 
+    textPage: \"Не можете решиться на путешествие из-за курса? Фотографии помогут вам забыть о политике и экономике.\"
   }
 %}
 
@@ -39,7 +39,9 @@ VALID_ARGUMENTS=$?
 
 function usage() {
   echo "Usage: create-block"
-  echo -e "\tdescription in process"
+  echo -e "\t[ -a | --alpha ] [ -b | --beta ]"
+  echo -e "\t[ -c | --charlie CHARLIE ]"
+  echo -e "\t[ -d | --delta   DELTA   ] filename(s)"
   exit 2
 }
 
@@ -58,6 +60,15 @@ while :; do
   --page-block)
     TYPE_BLOCK="pages"
     TEXT_NJK="$TEXT_PAGE"
+    TEXT_STYLE="
+      @import \"../../global/scss/variables.scss\";
+      @import \"../../global/scss/mixins.scss\";
+      @import \"../../global/scss/global_style.scss\";
+
+      @import \"../../blocks/header/header.scss\";
+
+      @import \"../../blocks/footer/footer.scss\";
+    "
     shift
     ;;
   --no-images)
@@ -121,7 +132,8 @@ while :; do
           "
 
           TEXT_STYLE="
-            .$2__title {
+            .$2 {
+              display: flex;
 
               @include media-tablet {
               }
@@ -166,8 +178,16 @@ while :; do
         echo "$TEXT_STYLE" >>"$PATH_BLOCK/$2.scss"
 
         if [ $PARENT != "unset" ]; then
-          sed -i "/<\/main>.*/i {% include \"blocks/$2/$2.njk\" %}" "./source/pages/$PARENT/$PARENT.njk"
-          echo "@import \"../../blocks/$2/$2.scss\";" >> "./source/pages/$PARENT/$PARENT.scss"
+          PATH_PARENT=$(find -name $PARENT)
+
+          if [[ $PATH_PARENT =~ (.+pages.+) ]]; then
+            sed -i "/<\/main>.*/i {% include \"blocks/$2/$2.njk\" %}" "$PATH_PARENT/$PARENT.njk"
+            echo "@import \"../../blocks/$2/$2.scss\";" >> "$PATH_PARENT/$PARENT.scss"
+          else
+            sed -i "/<\/section>.*/i {% include \"blocks/$2/$2.njk\" %}" "$PATH_PARENT/$PARENT.njk"
+            sed -i "1i @import \"../../blocks/$2/$2.scss\";" test.sh "$PATH_PARENT/$PARENT.scss"
+          fi
+
         fi
       else
         echo "No such \"source\" directory"
@@ -186,3 +206,4 @@ while :; do
     ;;
   esac
 done
+
